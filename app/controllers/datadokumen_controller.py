@@ -28,9 +28,11 @@ async def get_datadokumen_by_id(id: int):
     return datadokumen
 
 
-@app.put("/data-dosen/{id}")
+@app.put("/data-dokumen/{id}")
 async def update_datadokumen(id: int, nip: str, type_dokumen: str, nama_dokumen: str, nama_file: str):
     db = SessionLocal()
+    if type_dokumen != "file" and type_dokumen != "url":
+        return {"message": "Tipe dokumen harus file atau url"}
     datadokumen = db.query(DataDokumen).filter(DataDokumen.id == id).first()
     datadokumen.nip = nip
     datadokumen.type_dokumen = type_dokumen
@@ -40,7 +42,7 @@ async def update_datadokumen(id: int, nip: str, type_dokumen: str, nama_dokumen:
     return {"message": "Data Dokumen berhasil diperbarui"}
 
 
-@app.delete("/data-dosen/{id}")
+@app.delete("/data-dokumen/{id}")
 async def delete_datadokumen(id: int):
     db = SessionLocal()
     datadokumen = db.query(DataDokumen).filter(DataDokumen.id == id).first()

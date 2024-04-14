@@ -25,7 +25,7 @@ async def get_all_datadosen(authorize: AuthJWT = Depends(), token: HTTPAuthoriza
 
 
 @app.get("/data-dosen/{nip}")
-async def get_datadosen_by_id(nip: str, authorize: AuthJWT = Depends(), token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+async def get_datadosen_by_nip(nip: str, authorize: AuthJWT = Depends(), token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
     authorize.jwt_required()
     db = SessionLocal()
     datadosen = db.query(DataDosen).filter(DataDosen.nip == nip).first()

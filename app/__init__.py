@@ -39,15 +39,6 @@ def http_exception_handler(request: Request, exc: HTTPException):
     )
 
 
-# @app.openapi_schema["components"]["securitySchemes"] = {
-#     "BearerAuth": {
-#         "type": "http",
-#         "scheme": "bearer",
-#         "bearerFormat": "JWT"
-#     }
-# }
-
-
 from app import auth
 from app.controllers import (
     dataprodi_controller,
